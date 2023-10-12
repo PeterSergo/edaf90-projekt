@@ -1,24 +1,39 @@
 import React from "react";
-import { useState } from "react";
 
-function MediaViewer({ value }) {
-  const submit = (event) => {
-    event.preventDefault();
-  };
+function MediaViewer({ value, submit }) {
+  
 
   return (
-    <div>
-      <form onSubmit={submit}>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-
-        <p>{value["Title"]}</p>
-        <p>{value["Year"]}</p>
-        <button type="submit">Add to cart</button>
-      </form>
+    <div className="container-fluid mt-5">
+      <div className="row">
+        <div className="col-12">
+          <div className="card">
+            <div className="card-body">
+              {value ? (
+                <>
+                  <h4 className="card-title">{value["Title"]}</h4>
+                  <p className="card-text">Year: {value["Year"]}</p>
+                  <p className="card-text">IMDB rating: {value["imdbRating"]}</p>
+                  {value["Ratings"] ? (
+                    value["Ratings"].map((rating, index) => (
+                      <p key={index} className="card-text">
+                        Rating {index + 1}: {rating.Source} - {rating.Value}
+                      </p>
+                    ))
+                  ) : (
+                    <p className="card-text">No ratings available</p>
+                  )}
+                  <form onSubmit={submit}>
+                    <button type="submit" className="btn btn-primary">Add to cart</button>
+                  </form>
+                </>
+              ) : (
+                <p className="card-text"></p>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

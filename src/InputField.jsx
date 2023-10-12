@@ -1,11 +1,18 @@
 import React from 'react';
-import { useState } from 'react';
 
-function InputField({type, onChange}) {
+function InputField({ type, onChange }) {
   return (
-    <div>
-        <label htmlFor={type}>{type}:</label>
-        <input type="text" id={type} name={type} onChange={onChange} />
+    <div className="form-group">
+      <label htmlFor={type} className="form-label">
+        {type}:
+      </label>
+      <input
+        type="text"
+        id={type}
+        name={type}
+        className="form-control"
+        onChange={onChange}
+      />
     </div>
   );
 }
