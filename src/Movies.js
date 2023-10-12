@@ -41,10 +41,7 @@ const Order = () => {
     console.log(cart);
 
     const url = "http://www.omdbapi.com/?apikey=b32e5c98";
-    let urlParameters = "&t=" + movieToSearch;
-    if (/\d/.test(movieToSearch)) {
-      urlParameters = "&i=" + movieToSearch;
-    }
+    let urlParameters = /\d/.test(movieToSearch) ? `&i=${movieToSearch}` : `&t=${movieToSearch}`;
 
     urlParameters = urlParameters + "&type=" + mediaType;
     console.log(urlParameters);
@@ -52,6 +49,10 @@ const Order = () => {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
+        if(data["Response"] == "False"){
+          return;
+        }
+        
         handleMovieInfoChange(data);
       })
       .catch((error) => {
