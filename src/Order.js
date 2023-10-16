@@ -2,13 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { MyContext } from "./MyContext.js";
 
 const Order = () => {
-  const exempel = [
-    { name: "Pirates", info: "lorem", id: "1" },
-    { name: "Pirates2", info: "lorem", id: "2" },
-    { name: "jonfp + axel porno big dick small chick", info: "loem", id: "3" },
-  ];
-
-  let { cart, setCart } = useContext(MyContext);
+  let { cart, dispatch } = useContext(MyContext);
 
   return (
     <div className="container bg-light col-12">
@@ -22,6 +16,12 @@ const Order = () => {
             <div className="col p-1" key={film["imdbID"]}>
               {film["Title"]}
             </div>
+            <button
+              type="button p-1"
+              className="btn-close"
+              aria-label="Close"
+              onClick={() => handleRemove(film["imdbID"], dispatch)}
+            ></button>
           </div>
         ))}
       </div>
@@ -39,7 +39,11 @@ const Order = () => {
 function handleClick(e) {
   e.preventDefault();
   //TODO: Lägg till någonvart idk
-  //props.addSaladToCart(salad) fast istället add movie to cart?
-  console.log("omg du beställde jonfp + axel porno big dick small chick");
+  //lägg till filmen i en order i server? ja rätt ok tack
 }
+
+function handleRemove(id, dispatch) {
+  dispatch({ type: "remove", payload: id });
+}
+
 export default Order;

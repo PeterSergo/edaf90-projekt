@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 
 function InputField({ type, onChange }) {
   return (
     <div className="form-group">
       <label htmlFor={type} className="form-label">
-        {type}:
+        {type}
       </label>
       <input
         type="text"

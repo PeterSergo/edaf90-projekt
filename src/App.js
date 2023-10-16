@@ -3,26 +3,47 @@ import "bootstrap/dist/css/bootstrap.css";
 import { NavLink, Outlet } from "react-router-dom";
 import { MyContext } from "./MyContext";
 import { ViewMyContext } from "./ViewMyContext";
-import { useState } from "react";
+import { useState, useReducer } from "react";
 
 function App() {
   /*
-  let cart =
-    localStorage.getItem("cart") === null
-      ? []
-      : JSON.parse(localStorage.getItem("cart"));
-  */
-
   const [cart, setCart] = useState(
     localStorage.getItem("cart") === null
       ? []
       : JSON.parse(localStorage.getItem("cart"))
   );
+  */
 
-  //let cart = [];
+  function reducer(cart, action) {
+    let updatedCart;
+
+    switch (action.type) {
+      case "add":
+        updatedCart = [...cart, action.payload];
+        break;
+      case "remove":
+        updatedCart = cart.filter((item) => item.imdbID !== action.payload);
+        break;
+      default:
+        updatedCart = cart;
+    }
+
+    // Update local storage
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+
+    return updatedCart;
+  }
+
+  const [cart, dispatch] = useReducer(
+    reducer,
+    localStorage.getItem("cart") === null
+      ? []
+      : JSON.parse(localStorage.getItem("cart"))
+  );
+
   return (
     <div className="container py-4">
-      <MyContext.Provider value={{ cart, setCart }}>
+      <MyContext.Provider value={{ cart, dispatch }}>
         <Header />
         <ViewMyContext />
         <Navbar />

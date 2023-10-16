@@ -9,10 +9,11 @@ const Order = () => {
   const [movieToSearch, setMovie] = useState("");
   const [mediaType, setMediaType] = useState("");
 
-  let { cart, setCart } = useContext(MyContext);
+  let { cart, dispatch } = useContext(MyContext);
 
   const handleCartChange = (event) => {
-    setCart([...cart, event]);
+    dispatch({ type: "add", payload: event });
+
     //props = [...props, event];
     localStorage.setItem("cart", JSON.stringify([...cart, event]));
   };
@@ -71,20 +72,6 @@ const Order = () => {
 
   return (
     <div>
-      <div className="container mt-5">
-        <div className="card">
-          <div className="card-body">
-            <h2 className="card-title">Varukorg</h2>
-
-            {cart.map((film) => (
-              <div className="card mb-3" key={film["imdbID"]}>
-                <div className="card-body">{film["Title"]}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
       <form onSubmit={submit} className="mt-4 container mt-5">
         <div className="form-group">
           <InputField type={"Search for movie"} onChange={handleMovieChange} />
