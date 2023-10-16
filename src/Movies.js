@@ -1,16 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import DropDown from "./DropDown";
 import MediaViewer from "./MediaViewer";
 import InputField from "./InputField";
+import { MyContext } from "./MyContext.js";
 
 const Order = () => {
-  const [movieInfo, setMovieInfo] = useState("");
+  const [movieInfo, setMovieInfo] = useState("empty");
   const [movieToSearch, setMovie] = useState("");
   const [mediaType, setMediaType] = useState("");
-  const [cart, setCart] = useState([]);
+
+  let { cart, setCart } = useContext(MyContext);
 
   const handleCartChange = (event) => {
-    setCart([ ...cart, event ]);
+    setCart([...cart, event]);
+    //props = [...props, event];
+    localStorage.setItem("cart", JSON.stringify([...cart, event]));
   };
 
   const handleMovieInfoChange = (event) => {
@@ -32,27 +36,32 @@ const Order = () => {
 
   const addToCart = (event) => {
     event.preventDefault();
-    handleCartChange(movieInfo);
-  }
+    if (cart.some((movie) => movie.imdbID === movieInfo.imdbID)) {
+      return;
+    }
 
+    handleCartChange(movieInfo);
+  };
 
   const submit = (event) => {
     event.preventDefault();
-    console.log(cart);
 
     const url = "http://www.omdbapi.com/?apikey=b32e5c98";
-    let urlParameters = /\d/.test(movieToSearch) ? `&i=${movieToSearch}` : `&t=${movieToSearch}`;
+    let urlParameters = /\d/.test(movieToSearch)
+      ? `&i=${movieToSearch}`
+      : `&t=${movieToSearch}`;
 
     urlParameters = urlParameters + "&type=" + mediaType;
-    console.log(urlParameters);
+    console.log(url + urlParameters);
     fetch(url + urlParameters)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        if(data["Response"] == "False"){
+        if (data["Response"] === "False") {
+          handleMovieInfoChange("empty");
           return;
         }
-        
+
         handleMovieInfoChange(data);
       })
       .catch((error) => {
@@ -62,16 +71,14 @@ const Order = () => {
 
   return (
     <div>
-
       <div className="container mt-5">
         <div className="card">
           <div className="card-body">
             <h2 className="card-title">Varukorg</h2>
+
             {cart.map((film) => (
               <div className="card mb-3" key={film["imdbID"]}>
-                <div className="card-body">
-                  {film["Title"]}
-                </div>
+                <div className="card-body">{film["Title"]}</div>
               </div>
             ))}
           </div>
@@ -85,9 +92,10 @@ const Order = () => {
         <div className="form-group">
           <DropDown options={mediaTypes} onChange={handleMediaTypeChange} />
         </div>
-        <button type="submit" className="btn btn-primary">Search</button>
+        <button type="submit" className="btn btn-primary">
+          Search
+        </button>
       </form>
-
 
       <MediaViewer value={movieInfo} submit={addToCart} />
     </div>

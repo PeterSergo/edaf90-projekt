@@ -4,7 +4,7 @@ export default function ErrorPage() {
   return (
     <div>
       <h1 style={{ color: "red" }}>404 Error</h1>
-      <h1>Oj! Du verkar ha hamnat fel. Sidan du söker existerar inte.</h1>
+      <p>Oj! Du verkar ha hamnat fel. Sidan du söker existerar inte.</p>
       <p>Du kanske vill gå hit istället?</p>
       <li key="Hem">
         <NavLink to="/">Home</NavLink>
