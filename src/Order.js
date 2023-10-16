@@ -4,6 +4,21 @@ import { MyContext } from "./MyContext.js";
 const Order = () => {
   let { cart, dispatch } = useContext(MyContext);
 
+  function handleClick(e) {
+    e.preventDefault();
+    fetch("http://localhost:8080/orders", {
+      method: "POST",
+      headers: {
+        "Content-Type": "applications/json",
+      },
+      body: JSON.stringify(cart[0]),
+    })
+    console.log(JSON.stringify(cart[0]));
+  
+    //TODO: Lägg till någonvart idk
+    //lägg till filmen i en order i server? ja rätt ok tack
+  }
+
   return (
     <div className="container bg-light col-12">
       <h2>Varukorg: </h2>
@@ -35,12 +50,6 @@ const Order = () => {
     </div>
   );
 };
-
-function handleClick(e) {
-  e.preventDefault();
-  //TODO: Lägg till någonvart idk
-  //lägg till filmen i en order i server? ja rätt ok tack
-}
 
 function handleRemove(id, dispatch) {
   dispatch({ type: "remove", payload: id });
