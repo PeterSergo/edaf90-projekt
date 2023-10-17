@@ -11,7 +11,7 @@ const Order = () => {
       fetch("http://localhost:8080/orders", {
       method: "POST",
       headers: {
-        "Content-Type": "applications/json"
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({
         Title: movie.Title,
