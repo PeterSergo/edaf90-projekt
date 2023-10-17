@@ -15,7 +15,7 @@ const Order = () => {
       },
       body: JSON.stringify({
         Title: movie.Title,
-        id: movie.imdbID
+        imdbID: movie.imdbID
       })
     });
     });
