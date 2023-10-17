@@ -6,14 +6,20 @@ const Order = () => {
 
   function handleClick(e) {
     e.preventDefault();
-    fetch("http://localhost:8080/orders", {
+
+    cart.forEach(movie => {
+      fetch("http://localhost:8080/orders", {
       method: "POST",
       headers: {
-        "Content-Type": "applications/json",
+        "Content-Type": "applications/json"
       },
-      body: JSON.stringify(cart[0]),
-    })
-    console.log(JSON.stringify(cart[0]));
+      body: JSON.stringify({
+        Title: movie.Title,
+        id: movie.imdbID
+      })
+    });
+    });
+    //console.log(...JSON.stringify(cart[0]));
   
     //TODO: Lägg till någonvart idk
     //lägg till filmen i en order i server? ja rätt ok tack
