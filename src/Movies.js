@@ -46,6 +46,8 @@ const Order = () => {
 
   const submit = (event) => {
     event.preventDefault();
+    event.target.classList.add("was-validated");
+    //if (!event.target.checkValidity()) return;
 
     const url = "http://www.omdbapi.com/?apikey=b32e5c98";
     let urlParameters = /\d/.test(movieToSearch)
@@ -72,9 +74,14 @@ const Order = () => {
 
   return (
     <div>
-      <form onSubmit={submit} className="mt-4 container mt-5">
+      <form onSubmit={submit} className="mt-4 container mt-5" noValidate>
         <div className="form-group">
-          <InputField type={"Search for movie"} onChange={handleMovieChange} />
+
+          {/* <InputField type={"Search for a movie"} onChange={handleMovieChange}  /> */}
+          <label className="form-label" for="validation">Search for a movie</label>
+          <input onChange = {handleMovieChange} required type="text" class="form-control" id="validation"></input>
+          <div className="invalid-feedback">Vänligen sök efter en film.</div>
+
         </div>
         <div className="form-group">
           <DropDown options={mediaTypes} onChange={handleMediaTypeChange} />
