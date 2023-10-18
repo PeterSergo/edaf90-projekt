@@ -7,20 +7,20 @@ const Order = () => {
   function handleClick(e) {
     e.preventDefault();
 
-    cart.forEach(movie => {
+    cart.forEach((movie) => {
       fetch("http://localhost:8080/orders", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        Title: movie.Title,
-        imdbID: movie.imdbID
-      })
-    });
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          Title: movie.Title,
+          imdbID: movie.imdbID,
+        }),
+      });
     });
     //console.log(...JSON.stringify(cart[0]));
-  
+
     //TODO: Lägg till någonvart idk
     //lägg till filmen i en order i server? ja rätt ok tack
   }
@@ -28,7 +28,7 @@ const Order = () => {
   return (
     <div className="container bg-light col-12">
       <h2>Varukorg: </h2>
-      <div className="container bg-white border p-2">
+      <div className="p-3">
         {cart.map((film) => (
           <div
             className="row text-primary mt-2 p-3 border border-primary rounded-3"

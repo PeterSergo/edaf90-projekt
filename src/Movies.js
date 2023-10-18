@@ -8,6 +8,7 @@ const Order = () => {
   const [movieInfo, setMovieInfo] = useState("empty");
   const [movieToSearch, setMovie] = useState("");
   const [mediaType, setMediaType] = useState("");
+  const [showToast, setShowToast] = useState(false);
 
   let { cart, dispatch } = useContext(MyContext);
 
@@ -41,6 +42,7 @@ const Order = () => {
       return;
     }
 
+    setShowToast(true);
     handleCartChange(movieInfo);
   };
 
@@ -76,12 +78,18 @@ const Order = () => {
     <div>
       <form onSubmit={submit} className="mt-4 container mt-5" noValidate>
         <div className="form-group">
-
           {/* <InputField type={"Search for a movie"} onChange={handleMovieChange}  /> */}
-          <label className="form-label" for="validation">Search for a movie</label>
-          <input onChange = {handleMovieChange} required type="text" class="form-control" id="validation"></input>
+          <label className="form-label" for="validation">
+            Search for a movie
+          </label>
+          <input
+            onChange={handleMovieChange}
+            required
+            type="text"
+            class="form-control"
+            id="validation"
+          ></input>
           <div className="invalid-feedback">Vänligen sök efter en film.</div>
-
         </div>
         <div className="form-group">
           <DropDown options={mediaTypes} onChange={handleMediaTypeChange} />
@@ -92,6 +100,28 @@ const Order = () => {
       </form>
 
       <MediaViewer value={movieInfo} submit={addToCart} />
+
+      <div className="position-fixed bottom-0 end-0 p-3">
+        <div
+          className={`toast ${showToast ? "show" : ""}`}
+          role="alert"
+          aria-live="assertive"
+          aria-atomic="true"
+          data-bs-autohide="false"
+        >
+          <div className="toast-header">
+            <strong className="me-auto">Order confirmation</strong>
+            <button
+              type="button"
+              className="btn-close"
+              data-bs-dismiss="toast"
+              aria-label="Close"
+              onClick={() => setShowToast(false)}
+            ></button>
+          </div>
+          <div className="toast-body">filmen har lagts till i varukorgen</div>
+        </div>
+      </div>
     </div>
   );
 };

@@ -2,7 +2,6 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
 import { NavLink, Outlet } from "react-router-dom";
 import { MyContext } from "./MyContext";
-import { ViewMyContext } from "./ViewMyContext";
 import { useState, useReducer } from "react";
 
 function App() {
@@ -45,7 +44,6 @@ function App() {
     <div className="container py-4">
       <MyContext.Provider value={{ cart, dispatch }}>
         <Header />
-        <ViewMyContext />
         <Navbar />
         <div id="detail">
           <Outlet />
@@ -83,8 +81,8 @@ function Navbar() {
           Din Varukorg
         </NavLink>
       </li>
-      <li className = "nav-item">
-        <NavLink className="nav-link" to ="/historik">
+      <li className="nav-item">
+        <NavLink className="nav-link" to="/historik">
           Din Beställningshistorik
         </NavLink>
       </li>
