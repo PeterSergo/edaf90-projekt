@@ -83,6 +83,11 @@ function Navbar() {
           Din Varukorg
         </NavLink>
       </li>
+      <li className = "nav-item">
+        <NavLink className="nav-link" to ="/historik">
+          Din Beställningshistorik
+        </NavLink>
+      </li>
     </ul>
   );
 }

@@ -4,6 +4,8 @@ import Home from "./Home";
 import Order from "./Order";
 import Movies from "./Movies";
 import ErrorPage from "./ErrorPage";
+import History from "./History";
+
 const router = createBrowserRouter([
   {
     element: <App />,
@@ -24,6 +26,10 @@ const router = createBrowserRouter([
         path: "*",
         element: <ErrorPage />,
       },
+      {
+        path: "/historik",
+        element: <History />
+      }
     ],
   },
 ]);
