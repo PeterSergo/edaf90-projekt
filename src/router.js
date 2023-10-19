@@ -28,8 +28,8 @@ const router = createBrowserRouter([
       },
       {
         path: "/historik",
-        element: <History />
-      }
+        element: <History />,
+      },
     ],
   },
 ]);
