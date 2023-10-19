@@ -15,6 +15,9 @@ export default function ErrorPage() {
       <li key="Varukorg">
         <NavLink to="/varukorg">Order</NavLink>
       </li>
+      <li key="Beställningshistorik">
+        <NavLink to="/historik">History</NavLink>
+      </li>
     </div>
   );
 }

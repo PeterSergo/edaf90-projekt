@@ -23,6 +23,14 @@ server.post('/orders', (req, res) => {
   res.json({ message: 'Order added successfully' });
 });
 
+server.post('/orders', (req, res) => {
+  const { Title, imdbID } = req.body;
+
+  const orders = router.db.get('orders').value();
+
+  const ordersArray = Array.isArray(orders) ? orders : [];
+});
+
 //remove movie from db.json 
 server.delete('/orders/:imdbID', (req, res) => {
   const imdbID = req.params.imdbID;
@@ -37,7 +45,7 @@ server.delete('/orders/:imdbID', (req, res) => {
 });
 
 //clears all previous orders when the server restarts
-//router.db.set('orders', []).write();
+router.db.set('orders', []).write();
 
 server.use(router);
 
