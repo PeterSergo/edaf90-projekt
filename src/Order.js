@@ -19,10 +19,19 @@ const Order = () => {
         }),
       });
     });
-    //console.log(...JSON.stringify(cart[0]));
 
     //TODO: Lägg till någonvart idk
     //lägg till filmen i en order i server? ja rätt ok tack
+  }
+
+  function handleRemove(id) {
+    //remove the movie from the cart by dispatching a remove action
+    dispatch({ type: "remove", payload: id });
+
+    //remove the movie from the server's 'orders' array by sending a DELETE request
+    fetch(`http://localhost:8080/orders/${id}`, {
+      method: "DELETE",
+    });
   }
 
   return (

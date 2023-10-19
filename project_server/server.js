@@ -8,23 +8,32 @@ const express = require('express');
 server.use(express.json());
 server.use(middlewares);
 
-// Create a custom route to handle POST requests to /orders
+//add movie to db.json
 server.post('/orders', (req, res) => {
   const { Title, imdbID } = req.body;
 
-  // Assuming 'orders' is the key for your orders data in db.json
   const orders = router.db.get('orders').value();
 
-  // Ensure that you're working with an array
   const ordersArray = Array.isArray(orders) ? orders : [];
 
-  // Add the movie to the 'orders' array
   ordersArray.push({ Title, imdbID });
 
-  // Save the updated data to db.json
   router.db.set('orders', ordersArray).write();
 
   res.json({ message: 'Order added successfully' });
+});
+
+//remove movie from db.json 
+server.delete('/orders/:imdbID', (req, res) => {
+  const imdbID = req.params.imdbID;
+
+  const orders = router.db.get('orders').value();
+
+  const updatedOrders = orders.filter((order) => order.imdbID !== imdbID);
+
+  router.db.set('orders', updatedOrders).write();
+
+  res.json({ message: 'Order removed successfully' });
 });
 
 server.use(router);
