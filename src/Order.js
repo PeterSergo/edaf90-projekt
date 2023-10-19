@@ -24,16 +24,6 @@ const Order = () => {
     //lägg till filmen i en order i server? ja rätt ok tack
   }
 
-  function handleRemove(id) {
-    //remove the movie from the cart by dispatching a remove action
-    dispatch({ type: "remove", payload: id });
-
-    //remove the movie from the server's 'orders' array by sending a DELETE request
-    fetch(`http://localhost:8080/orders/${id}`, {
-      method: "DELETE",
-    });
-  }
-
   return (
     <div className="container bg-light col-12">
       <h2>Varukorg: </h2>
@@ -50,7 +40,7 @@ const Order = () => {
               type="button p-1"
               className="btn-close"
               aria-label="Close"
-              onClick={() => handleRemove(film["imdbID"], dispatch)}
+              onClick={() => handleRemove(film["imdbID"])}
             ></button>
           </div>
         ))}

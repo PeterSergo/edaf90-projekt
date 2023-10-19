@@ -3,6 +3,8 @@ import "bootstrap/dist/css/bootstrap.css";
 import { NavLink, Outlet } from "react-router-dom";
 import { MyContext } from "./MyContext";
 import { useState, useReducer } from "react";
+import {useNavigation, useLocation} from 'react-router-dom';
+import BootstrapSpinner from "./BootstrapSpinner";
 
 function App() {
   /*
@@ -12,7 +14,7 @@ function App() {
       : JSON.parse(localStorage.getItem("cart"))
   );
   */
-
+  const navigation = useNavigation();
   function reducer(cart, action) {
     let updatedCart;
 
@@ -46,7 +48,11 @@ function App() {
         <Header />
         <Navbar />
         <div id="detail">
-          <Outlet />
+          {navigation.state === 'loading' || navigation.state === 'submitting' ? (
+            <BootstrapSpinner />
+          ) : (
+            <Outlet />
+          )}
         </div>
 
         <Footer />
@@ -58,7 +64,7 @@ function App() {
 function Header() {
   return (
     <header className="pb-3 mb-4 border-bottom">
-      <span className="fs-4">IMDB reviews</span>
+      <span className="fs-4">Filmer & serier</span>
     </header>
   );
 }

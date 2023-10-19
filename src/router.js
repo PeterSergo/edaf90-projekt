@@ -5,6 +5,7 @@ import Order from "./Order";
 import Movies from "./Movies";
 import ErrorPage from "./ErrorPage";
 import History from "./History";
+import historyLoader from "./HistoryLoader";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/historik",
+        loader: historyLoader,
         element: <History />,
       },
     ],
