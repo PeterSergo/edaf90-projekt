@@ -36,6 +36,9 @@ server.delete('/orders/:imdbID', (req, res) => {
   res.json({ message: 'Order removed successfully' });
 });
 
+//clears all previous orders when the server restarts
+//router.db.set('orders', []).write();
+
 server.use(router);
 
 server.listen(8080, () => {
