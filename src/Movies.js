@@ -80,7 +80,7 @@ const Order = () => {
         <div className="form-group">
           {/* <InputField type={"Search for a movie"} onChange={handleMovieChange}  /> */}
           <label className="form-label" for="validation">
-            Search for a movie
+            Sök efter en film eller serie
           </label>
           <input
             onChange={handleMovieChange}
@@ -95,7 +95,7 @@ const Order = () => {
           <DropDown options={mediaTypes} onChange={handleMediaTypeChange} />
         </div>
         <button type="submit" className="btn btn-primary">
-          Search
+          Sök
         </button>
       </form>
 
@@ -110,7 +110,7 @@ const Order = () => {
           data-bs-autohide="false"
         >
           <div className="toast-header">
-            <strong className="me-auto">Order confirmation</strong>
+            <strong className="me-auto">Orderbekräftelse</strong>
             <button
               type="button"
               className="btn-close"

@@ -30,7 +30,7 @@ function MediaViewer({ value, submit }) {
                   </form>
                 </>
               ) : (
-                <p className="card-text">No media found</p>
+                <p className="card-text">Inget resultat hittades</p>
               )}
             </div>
           </div>
