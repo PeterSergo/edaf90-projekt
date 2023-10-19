@@ -34,7 +34,7 @@ const Order = () => {
 
     setMediaType(event.target.value);
   };
-  const mediaTypes = ["movies", "series", "episode"];
+  const mediaTypes = ["movie", "series", "episode"];
 
   const addToCart = (event) => {
     event.preventDefault();
