@@ -58,7 +58,7 @@ function App() {
 function Header() {
   return (
     <header className="pb-3 mb-4 border-bottom">
-      <span className="fs-4">IMDB reviews</span>
+      <span className="fs-4">Filmer & serier</span>
     </header>
   );
 }
