@@ -91,7 +91,7 @@ const Order = () => {
           <DropDown options={mediaTypes} onChange={handleMediaTypeChange} />
         </div>
         <button type="submit" className="btn btn-primary">
-          Search
+          Sök
         </button>
       </form>
 
@@ -106,7 +106,7 @@ const Order = () => {
           data-bs-autohide="false"
         >
           <div className="toast-header">
-            <strong className="me-auto">Order confirmation</strong>
+            <strong className="me-auto">Orderbekräftelse</strong>
             <button
               type="button"
               className="btn-close"

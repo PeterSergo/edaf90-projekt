@@ -3,7 +3,7 @@ import React from "react";
 function DropDown({ onChange, options }) {
   return (
     <div className="form-group">
-      <label htmlFor="mediaType">Please select a media type</label>
+      <label htmlFor="mediaType">Välj vilken typ av media</label>
       <select
         className="form-control"
         id="mediaType"
