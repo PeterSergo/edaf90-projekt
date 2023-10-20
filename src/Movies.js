@@ -14,8 +14,6 @@ const Order = () => {
 
   const handleCartChange = (event) => {
     dispatch({ type: "add", payload: event });
-
-    //props = [...props, event];
     localStorage.setItem("cart", JSON.stringify([...cart, event]));
   };
 
@@ -49,7 +47,6 @@ const Order = () => {
   const submit = (event) => {
     event.preventDefault();
     event.target.classList.add("was-validated");
-    //if (!event.target.checkValidity()) return;
 
     const url = "http://www.omdbapi.com/?apikey=b32e5c98";
     let urlParameters = /\d/.test(movieToSearch)
@@ -78,15 +75,14 @@ const Order = () => {
     <div>
       <form onSubmit={submit} className="mt-4 container mt-5" noValidate>
         <div className="form-group">
-          {/* <InputField type={"Search for a movie"} onChange={handleMovieChange}  /> */}
-          <label className="form-label" for="validation">
+          <label className="form-label" htmlFor="validation">
             Search for a movie
           </label>
           <input
             onChange={handleMovieChange}
             required
             type="text"
-            class="form-control"
+            className="form-control"
             id="validation"
           ></input>
           <div className="invalid-feedback">Vänligen sök efter en film.</div>

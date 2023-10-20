@@ -5,7 +5,19 @@ import Order from "./Order";
 import Movies from "./Movies";
 import ErrorPage from "./ErrorPage";
 import History from "./History";
-import historyLoader from "./HistoryLoader";
+//import historyLoader from "./HistoryLoader";
+
+async function historyLoader() {
+  let orderHistory = {};
+  await new Promise((resolve) => setTimeout(resolve, 500));
+  await fetch("http://localhost:8080/orders", {
+    method: "GET",
+  })
+    .then((result) => result.json())
+    .then((data) => Object.assign(orderHistory, data));
+
+  return orderHistory;
+}
 
 const router = createBrowserRouter([
   {

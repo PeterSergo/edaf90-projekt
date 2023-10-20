@@ -7,21 +7,30 @@ const Order = () => {
   function handleClick(e) {
     e.preventDefault();
 
-    cart.forEach((movie) => {
+    const object = {
+      Order: [],
+      Timestamp: new Date().getTime(),
+    };
+
+    if (cart.length != 0) {
+      cart.forEach((movie) => {
+        object["Order"].push({
+          Title: movie.Title,
+          imdbID: movie.imdbID,
+        });
+      });
+
+      console.log(JSON.stringify(object));
       fetch("http://localhost:8080/orders", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          Title: movie.Title,
-          imdbID: movie.imdbID,
-        }),
+        body: JSON.stringify(object),
       });
-    });
+    }
 
-    //TODO: Lägg till någonvart idk
-    //lägg till filmen i en order i server? ja rätt ok tack
+    dispatch({ type: "clear" });
   }
 
   return (
@@ -40,7 +49,7 @@ const Order = () => {
               type="button p-1"
               className="btn-close"
               aria-label="Close"
-              onClick={() => handleRemove(film["imdbID"])}
+              onClick={() => handleRemove(film["imdbID"], dispatch)}
             ></button>
           </div>
         ))}

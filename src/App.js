@@ -3,17 +3,10 @@ import "bootstrap/dist/css/bootstrap.css";
 import { NavLink, Outlet } from "react-router-dom";
 import { MyContext } from "./MyContext";
 import { useState, useReducer } from "react";
-import {useNavigation, useLocation} from 'react-router-dom';
+import { useNavigation, useLocation } from "react-router-dom";
 import BootstrapSpinner from "./BootstrapSpinner";
 
 function App() {
-  /*
-  const [cart, setCart] = useState(
-    localStorage.getItem("cart") === null
-      ? []
-      : JSON.parse(localStorage.getItem("cart"))
-  );
-  */
   const navigation = useNavigation();
   function reducer(cart, action) {
     let updatedCart;
@@ -24,6 +17,9 @@ function App() {
         break;
       case "remove":
         updatedCart = cart.filter((item) => item.imdbID !== action.payload);
+        break;
+      case "clear":
+        updatedCart = [];
         break;
       default:
         updatedCart = cart;
@@ -48,7 +44,8 @@ function App() {
         <Header />
         <Navbar />
         <div id="detail">
-          {navigation.state === 'loading' || navigation.state === 'submitting' ? (
+          {navigation.state === "loading" ||
+          navigation.state === "submitting" ? (
             <BootstrapSpinner />
           ) : (
             <Outlet />
